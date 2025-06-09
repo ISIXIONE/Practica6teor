@@ -1,0 +1,42 @@
+#include <stdio.h>
+
+int main() {
+    char text[] = "the cat sat on the mat";
+    char target[] = "cat";
+    int textLength = 0;
+    int targetLength = 0;
+
+    // Подсчет длины строки text
+    while (text[textLength] != '\0') { // Цикл продолжается пока не встретится символ конца строки '\0'
+        textLength++;
+    }
+
+    // Подсчет длины строки target
+    while (target[targetLength] != '\0') { // Аналогично предыдущему циклу
+        targetLength++;
+    }
+
+    // Поиск вхождения target внутри text
+    int foundIndex = -1;
+    for (int i = 0; i <= textLength - targetLength; i++) { // Проходим по каждому возможному началу искомого слова
+        int match = 1;
+        for (int j = 0; j < targetLength; j++) { // Проверяем каждую букву от начала текущего возможного совпадения
+            if (text[i + j] != target[j]) {
+                match = 0;
+                break;
+            }
+        }
+        if (match == 1) {
+            foundIndex = i;
+            break;
+        }
+    }
+
+    // Вывод результата поиска
+    if (foundIndex != -1) {
+        printf("Слово \"%s\" найдено на позиции %d\n", target, foundIndex);
+    } else {
+        printf("Слово \"%s\" не найдено\n", target);
+    }
+
+    return 0;
