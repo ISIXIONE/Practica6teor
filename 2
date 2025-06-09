@@ -1,0 +1,35 @@
+#include <stdio.h>
+
+int main() {
+    char text[] = "the cat sat on the mat";
+    int textLength = 0;
+
+    // Считаем количество символов в строке
+    while (text[textLength] != '\0') {
+        textLength++;
+    }
+
+    // Ограничиваемся максимум 10 словами длиной до 20 символов каждое
+    char words[10][20];
+    int wordIndex = 0;  // Текущий индекс массива слов
+    int letterIndex = 0; // Индексация букв в текущем слове
+
+    for (int i = 0; i <= textLength; i++) {
+        if (text[i] == ' ' || text[i] == '\0') {
+            words[wordIndex][letterIndex] = '\0'; // Закрываем текущее слово символом окончания строки
+            wordIndex++;
+            letterIndex = 0; // Начинаем новую запись с индекса 0
+        } else {
+            words[wordIndex][letterIndex] = text[i];
+            letterIndex++;
+        }
+    }
+
+    // Печатаем отдельно каждое выведенное слово
+    printf("Разделённые слова:\n");
+    for (int i = 0; i < wordIndex; i++) {
+        printf("%s\n", words[i]);
+    }
+
+    return 0;
+}
